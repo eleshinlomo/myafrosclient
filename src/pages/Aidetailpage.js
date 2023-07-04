@@ -17,7 +17,7 @@ const Aidetailpage = () => {
   const getAgent = async () => {
     if (!id) return null;
     try {
-      const response = await fetch(`http://localhost:8000/api/${id}/`, {
+      const response = await fetch(`/api/agent/${id}/`, {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },

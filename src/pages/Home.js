@@ -15,15 +15,35 @@ import {
 function Home() {
   const [agent, setAgent] = useState([])
   const [test, setTest] = useState(null)
-
-  // Test API
+  const [users, setUsers] = useState([])
 
   
-  
+
+  // get all users
+  const getUsers =async ()=>{
+    await fetch('api/users/', {
+      mode: 'cors',
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then((data)=>{
+      if(!data) return null
+      return  data.json()
+    })
+
+    .then((res)=>{
+      console.log(res)
+      
+
+    }).catch((err)=>{
+      console.log('ERROR:', err.message)
+    })
+  }
 
 
-  const getAgent =async ()=>{
-    await fetch('api/', {
+// get all agents
+  const getAgents =async ()=>{
+    await fetch('api/agents/', {
       mode: 'cors',
       method: 'GET',
       headers: {'Content-Type': 'application/json'}
@@ -44,7 +64,8 @@ function Home() {
 
   useEffect(()=>{
     
-    getAgent()
+    getAgents()
+    getUsers()
   }, [])
 
 
@@ -80,7 +101,7 @@ function Home() {
   });
 
   return (
-    <div className="">
+    <div className="home-wrapper">
       <ThemeProvider theme={theme}>
         <Grid container spacing={2} xs={12} sm={12} md={12} lg={12} xl={12} justifyContent="center" alignItems="center">
           

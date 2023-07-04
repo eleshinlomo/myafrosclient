@@ -11,12 +11,15 @@ import {Box, ThemeProvider,
 const Signuppage = () => {
 
     const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [email, setEmail] = useState('')
+    const [message, setMessage] = useState('')
     
 
     const handleSignup = async (e)=>{
         e.preventDefault()
         
-        await fetch('/spanish/', {
+        await fetch('http://localhost:8000/members/addmember/', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -24,47 +27,29 @@ const Signuppage = () => {
             
         },
         body: JSON.stringify({
-            username: username
+            username,
+            password,
+            email
         })
       })
       .then((data)=>{
-        if(!data){
-          return
-        }else{
-          return data.json()
-        }
-      })
-    
-      .then((res)=>{
-        console.log(res)
-      })
-    }
-    
-    
-
-    const getGreeting = async (e)=>{
+        if(!data) return
+        return data.json()
         
-        await fetch('/spanish/', {
-        method: 'GET',
-        mode: 'cors',
-        headers: {'Content-Type': 'application/json'}
-      })
-      .then((data)=>{
-        if(!data){
-          return
-        }else{
-          return data.json()
-        }
       })
     
       .then((res)=>{
         console.log(res)
+        if(res.ok) return setMessage(res.message)
+        return setMessage('Error with registration')
+      })
+      .catch((err)=>{
+        console.log(err.message)
+        setMessage(err.message)
       })
     }
     
-    useEffect(()=>{
-      getGreeting()
-    }, [])
+    
 
 
   return (
@@ -74,9 +59,18 @@ const Signuppage = () => {
         <Box sx={{
             paddingY: 5
         }}>
-       <form>
-        <Input name='user_input' 
-            placeholder='Email'
+        <Typography>
+            <h3>{message}</h3>
+        </Typography>
+       <form onSubmit={handleSignup}>
+
+        {/* username */}
+       <Input  
+            type='text'
+            onChange={(e)=>setUsername(e.target.value)}
+            value={username}
+            name={username}
+            placeholder='Username'
             sx={{
               borderBottom: '2px solid #00FFFF',
               mb:3,
@@ -86,7 +80,13 @@ const Signuppage = () => {
             }}
             /><br/>
 
-            <Input name='user_input' 
+            {/* password */}
+
+            <Input 
+            type='password' 
+            onChange={(e)=>setPassword(e.target.value)}
+            value={password}
+            name={password}
             placeholder='Password'
             sx={{
               borderBottom: '2px solid #00FFFF',
@@ -95,14 +95,31 @@ const Signuppage = () => {
               width: '12rem',
               textAlign: 'center'
             }}
-             /><br/>
-            <Button variant='contained' sx={{
+            /><br/>
+
+       {/* email */}
+        <Input 
+            type='email' 
+            onChange={(e)=>setEmail(e.target.value)}
+            value={email}
+            name={email}
+            placeholder='Email'
+            sx={{
+              borderBottom: '2px solid #00FFFF',
+              mb:3,
+              color: 'white',
+              width: '12rem',
+              textAlign: 'center'
+            }}
+            /><br/>
+            <Button type='submit' variant='contained' sx={{
               width: 12,
               paddingX: 12,
               backgroundColor: '#00FFFF',
-              color: 'black'
+              color: 'black',
+              fontSize: 16
               
-            }}>Login</Button>
+            }}>Sign Up</Button>
         </form>
         </Box>
         </Grid>
