@@ -101,54 +101,136 @@ function Home() {
   });
 
   return (
-    <div className="home-wrapper">
+    <div className="">
       <ThemeProvider theme={theme}>
-        <Grid container spacing={2} xs={12} sm={12} md={12} lg={12} xl={12} justifyContent="center" alignItems="center">
+       
+
+        <Box display='flex' justifyContent='center' alignItems='center' sx={{
+          color: '#00FFFF'
+        }}>
+
+        <Box sx={{
+          textAlign: 'center'
+        }}>
+         
+         <Box>
+        <Typography>
+                 {
+                  <Typewriter align='center' text={'MEET OUR EMPLOYEES'} />
+                 }
+                </Typography>
+                </Box>
+        
+
+        {/* AI Section */}
+
+        {/* first section */}
           
-            <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
-              
-              <Box sx={{ 
-                display: 'block',
-                position: 'relative',
+            <Box  xl={6} sx={{ 
+                display: 'flex',
                 color: '#00FFFF',
                 textAlign: 'center',
                 margin: 2
               
-              }} xs={12} sm={12} md={12} lg={12} xl={12}>
-
-                 <Typography>
-                 {
-                  <Typewriter text={'MEET OUR EMPLOYEES'} />
-                 }
-                </Typography>
-
-              <Box sx={{
-                  display: 'flex',
-                  gap: 5,
-                  justifyContent: 'space-evenly',
-                  alignItems: 'center',
+              }}>
+              
+              
+              {agent.slice(0, 2).map(agent =>
+               
+                <Box  key={agent.id}
+                  sx={{
                   marginTop: 7,
                   marginX: 2,
-                  width: 'auto',
+                  
+                  
                   [theme.breakpoints.down('lg')]: {
                     display: 'block'
                   }
     
                 }}>
-
-               
-              
-              {agent.map(agent =>
-               
-                <div key={agent.id}>
-                <Link to={`/aidetailpage/${agent.id}`}>
+                
+                <Link to={`/agentdetailpage/${agent.id}`}>
 
                 
-
+               
              {/* Image */}
-
+               
                 <Box sx={{
-                  width: '100%',
+                
+                  height: 200,
+                  width: 'auto',
+                  borderRadius: '60%',
+                  
+                }}>
+                  <img src={`${agent.image}`} alt="AI" className='img' />
+                </Box>
+
+              {/* Agent Profile */}
+
+               
+                    
+                    <Paper sx={{
+                      color: 'white',
+                      bgcolor: '#25383C',
+                      borderRadius: '40px',
+                      overflow: 'hidden',
+                      paddingY: 4,
+                      paddingX: 2,
+                      elevation: 2,
+                     
+                    }}>
+                    <Typography align='center'>
+                    <h3>{agent.name}</h3>
+                    </Typography>
+
+                    <Typography sx={{
+    
+                    }}>
+                    <h3>{agent.profile}</h3>
+                    </Typography>
+                    <Button variant='contained' size='small' sx={{backgroundColor:'#00FFFF', color: 'black'}}>Get Started</Button>
+                    </Paper>
+                    </Link>
+
+                    </Box>
+                    
+                  )}
+                  </Box>
+
+
+                   {/* second section */}
+          
+            <Box  xl={6} sx={{ 
+                display: 'flex',
+                color: '#00FFFF',
+                textAlign: 'center',
+                margin: 2
+              
+              }}>
+              
+              
+              {agent.slice(2, 4).map(agent =>
+               
+                <Box  key={agent.id}
+                  sx={{
+                  marginTop: 7,
+                  marginX: 2,
+                  
+                  
+                  [theme.breakpoints.down('lg')]: {
+                    display: 'block'
+                  }
+    
+                }}>
+                
+                <Link to={`/agentdetailpage/${agent.id}`}>
+
+                
+               
+             {/* Image */}
+               
+                <Box sx={{
+                
                   height: 200,
                   borderRadius: '60%',
                   
@@ -178,15 +260,14 @@ function Home() {
                     </Typography>
                     <Button variant='contained' size='small' sx={{backgroundColor:'#00FFFF', color: 'black'}}>Get Started</Button>
                     </Paper>
-
-
-                   
-
                     </Link>
-                    </div>
+
+                    </Box>
+                    
                   )}
                   </Box>
-                  
+
+
                   <Box>
                  <Typography sx={{
                   margin: 3,
@@ -196,18 +277,11 @@ function Home() {
                   WHAT'S NEW
                  </Typography>
                   </Box>
-                  
-              </Box>
-            </Grid>
 
 
-  
 
-            
-          
-
-
-        </Grid>
+</Box>
+        </Box>
       </ThemeProvider>
     </div>
   );

@@ -108,11 +108,19 @@ const Aidetailpage = () => {
 
       {agent && (
         <Box>
-          
+        <Typography sx={{
+          textAlign: 'center'
+        }}>
+        <p>{agent.name}</p>
+        </Typography>
           <img src={agent.image} className='img' alt="ai" />
         </Box>
       )}
       </Grid>
+
+
+
+      
 
 
 {/* if spanish agent */}
@@ -122,10 +130,7 @@ const Aidetailpage = () => {
       }}>
 {isSpanish && (
         <Box>
-          <Typography>
-          <h2>{agent.name}</h2>
-            <p>Hello. I am Anika and I speak Spanish</p>
-          </Typography>
+          
           <form onSubmit={spanishTranslator}>
             <Input value={user_input} name='user_input'onChange={(e)=>setUser_input(e.target.value)} 
             placeholder='I will translate to Spanish'

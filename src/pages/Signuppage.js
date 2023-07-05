@@ -13,7 +13,7 @@ const Signuppage = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
-    const [message, setMessage] = useState('')
+    const [message, setMessage] = useState('Sign Up')
     
 
     const handleSignup = async (e)=>{
@@ -32,16 +32,21 @@ const Signuppage = () => {
             email
         })
       })
+
       .then((data)=>{
         if(!data) return
         return data.json()
-        
       })
-    
+      
       .then((res)=>{
         console.log(res)
-        if(res.ok) return setMessage(res.message)
-        return setMessage('Error with registration')
+        if(res.ok)
+        setUsername('')
+        setPassword('')
+        setEmail('')
+        setMessage(res.message)
+        return
+        
       })
       .catch((err)=>{
         console.log(err.message)
@@ -55,9 +60,12 @@ const Signuppage = () => {
   return (
     <div>
         <Grid  container sm={12} md={12} lg={12} xl={12} justifyContent='center' alignItems='center'>
-        <Grid item>
+        <Grid item sx={{
+            color: 'white'
+        }}>
         <Box sx={{
-            paddingY: 5
+            paddingY: 5,
+
         }}>
         <Typography>
             <h3>{message}</h3>
@@ -112,7 +120,7 @@ const Signuppage = () => {
               textAlign: 'center'
             }}
             /><br/>
-            <Button type='submit' variant='contained' sx={{
+            <Button size='small' type='submit' variant='contained' sx={{
               width: 12,
               paddingX: 12,
               backgroundColor: '#00FFFF',

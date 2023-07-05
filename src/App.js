@@ -10,7 +10,7 @@ import Home from './pages/Home';
 import Nav from './components/Nav';
 import Loginpage from './pages/Loginpage';
 import Signuppage from './pages/Signuppage';
-import Aidetailpage from './pages/Aidetailpage';
+import Agentdetailpage from './pages/Agentdetailpage';
 import Footer from './components/Footer';
 
 
@@ -31,7 +31,7 @@ function App() {
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Loginpage />} />
           <Route path='/signup' element={<Signuppage />} />
-          <Route path='/aidetailpage/:id' element={<Aidetailpage />} />
+          <Route path='/agentdetailpage/:id' element={<Agentdetailpage />} />
         </Routes>
         <Footer />
     
