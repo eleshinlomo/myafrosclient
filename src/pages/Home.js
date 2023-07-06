@@ -16,12 +16,13 @@ function Home() {
   const [agent, setAgent] = useState([])
   const [test, setTest] = useState(null)
   const [users, setUsers] = useState([])
-
+  const [countAnikaClicks, setCountAnikaClicks] = useState(0)
+  const [countChimzyClicks, setCountChimzyClicks] = useState(0)
   
 
   // get all users
   const getUsers =async ()=>{
-    await fetch('api/users/', {
+    await fetch('/api/users/', {
       mode: 'cors',
       method: 'GET',
       headers: {'Content-Type': 'application/json'}
@@ -43,7 +44,7 @@ function Home() {
 
 // get all agents
   const getAgents =async ()=>{
-    await fetch('api/agents/', {
+    await fetch('/api/agents/', {
       mode: 'cors',
       method: 'GET',
       headers: {'Content-Type': 'application/json'}
@@ -126,7 +127,7 @@ function Home() {
 
         {/* first section */}
           
-            <Box  xl={6} sx={{ 
+            <Box  xl={4} sx={{ 
                 display: 'flex',
                 color: '#00FFFF',
                 textAlign: 'center',
@@ -157,7 +158,7 @@ function Home() {
                
                 <Box sx={{
                 
-                  height: 200,
+                  height: 300,
                   width: 'auto',
                   borderRadius: '60%',
                   
@@ -195,12 +196,15 @@ function Home() {
                     </Box>
                     
                   )}
+
+
+           
                   </Box>
 
 
                    {/* second section */}
           
-            <Box  xl={6} sx={{ 
+            <Box  xl={4} sx={{ 
                 display: 'flex',
                 color: '#00FFFF',
                 textAlign: 'center',
@@ -278,9 +282,19 @@ function Home() {
                  </Typography>
                   </Box>
 
+                  <Box xl={4} sx={{
+                    backgroundColor: 'gray'
+                  }}>
+  <h3>Anika Clicks: {countAnikaClicks}</h3>
+  <h3>Chimzy Clicks: {countChimzyClicks}</h3>
+</Box>
 
+ 
 
 </Box>
+
+
+
         </Box>
       </ThemeProvider>
     </div>

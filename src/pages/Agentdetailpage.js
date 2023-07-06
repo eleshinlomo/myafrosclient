@@ -178,7 +178,7 @@ const Aidetailpage = () => {
               </Typography>
             </Box>
           )}
-
+      
           </Box>
           )}
           </Box>

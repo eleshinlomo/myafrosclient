@@ -16,43 +16,41 @@ const Signuppage = () => {
     const [message, setMessage] = useState('Sign Up')
     
 
-    const handleSignup = async (e)=>{
-        e.preventDefault()
-        
-        await fetch('http://localhost:8000/members/addmember/', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            
-        },
-        body: JSON.stringify({
+    const handleSignup = async (e) => {
+        e.preventDefault();
+      
+        const csrftoken = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("csrftoken="))
+          .split("=")[1];
+      
+        await fetch("/api/createuser/", {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify({
             username,
             password,
-            email
+            email,
+          }),
         })
-      })
-
-      .then((data)=>{
-        if(!data) return
-        return data.json()
-      })
+          .then((data) => {
+            if (!data) return;
+            return data.json();
+          })
+          .then((res) => {
+              console.log(res)
+              setMessage(res.message);
+          })
+          .catch((err) => {
+            console.log(err.message);
+            
+          });
+      };
       
-      .then((res)=>{
-        console.log(res)
-        if(res.ok)
-        setUsername('')
-        setPassword('')
-        setEmail('')
-        setMessage(res.message)
-        return
-        
-      })
-      .catch((err)=>{
-        console.log(err.message)
-        setMessage(err.message)
-      })
-    }
     
     
 
