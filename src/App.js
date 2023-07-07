@@ -12,6 +12,7 @@ import Loginpage from './pages/Loginpage';
 import Signuppage from './pages/Signuppage';
 import Agentdetailpage from './pages/Agentdetailpage';
 import Footer from './components/Footer';
+import Menu2 from './components/Menu2'
 
 
 function App() {
@@ -25,8 +26,8 @@ function App() {
   return (
 
     <div className="">
-    
-      <Nav />
+    <ThemeProvider theme={theme}>
+      <Menu2 />
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Loginpage />} />
@@ -34,6 +35,7 @@ function App() {
           <Route path='/agentdetailpage/:id' element={<Agentdetailpage />} />
         </Routes>
         <Footer />
+        </ThemeProvider>
     
       
     </div>

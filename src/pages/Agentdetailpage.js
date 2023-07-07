@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { Box, Typography, Input, Button, Grid} from '@mui/material';
 import '../App.css'
+import { createTheme, ThemeProvider } from '@mui/material';
 
 const Aidetailpage = () => {
   const [agent, setAgent] = useState(null);
@@ -95,18 +96,28 @@ const Aidetailpage = () => {
 
   
 
-
+const theme = createTheme({
+  palette: {
+    mode: 'dark'
+  }
+});
 
   return (
     <div>
+    <ThemeProvider theme={theme}>
     <Grid container xl={12} display='flex'  justifyContent='space-between' alignItems='center' sx={{
   
         color: '#00FFFF',
+        [theme.breakpoints.down('md')]: {
+          display: 'block'
+        }
 
     
     }}>
 
-      <Grid item xl={6}>
+      <Grid item xl={6} sx={{
+       
+      }}>
 
       {agent && (
         <Box>
@@ -115,7 +126,16 @@ const Aidetailpage = () => {
         }}>
         <h3>{`${agent.name} here, How can I help you today?`}</h3>
         </Typography>
+        <Box sx={{
+          height: 600,
+          width: 300,
+          [theme.breakpoints.down('md')]: {
+            height: 250,
+            width: 250
+          }
+        }}>
           <img src={agent.image} className='img' alt="ai" />
+          </Box>
         </Box>
       )}
       </Grid>
@@ -192,6 +212,7 @@ const Aidetailpage = () => {
     
 
 </Grid>
+</ThemeProvider>
     </div>
   );
 };
