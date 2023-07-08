@@ -163,7 +163,7 @@ const theme = createTheme({
           Just so you know, I have been capped at 30 tokens. 
           This means I cannot give long responses. You may wish to 
           <Button href='/signup'>Sign Up</Button> or 
-          <Button href='/login'>Login</Button> to get free tokens for uncapped
+          <Button href='/login'>Login</Button> to get free credits for uncapped
           responses.
         </Typography>
       </Box>

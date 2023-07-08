@@ -125,7 +125,7 @@ const Signuppage = () => {
               color: 'black',
               fontSize: 16
               
-            }}>Sign Up</Button>
+            }}>Register</Button>
         </form>
         </Box>
         </Grid>

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React,{useState} from 'react';
 import { styled, useTheme } from '@mui/material/styles';
 import {Box, Button }from '@mui/material';
 import Drawer from '@mui/material/Drawer';
@@ -51,7 +51,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [credit, setCredit] = useState(0)
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -62,7 +63,8 @@ export default function PersistentDrawerLeft() {
   };
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', marginBottom:6}}>
+    
       <CssBaseline />
       <AppBar position="fixed" open={open}>
         <Toolbar>
@@ -75,11 +77,39 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-
-          
           <Button href='/' variant="h6">
             MyAfros
           </Button>
+
+          <Box marginLeft='auto'>
+          <Button>
+            Beta
+          </Button>
+          
+
+          
+          <Button size='small' href='/register' variant="contained" sx={{
+            paddingX: 2,
+            margin: 1,
+            color: 'black',
+            fontSize: 12,
+            fontWeight: 'bold'
+          }}>
+            Register
+          </Button>
+
+          <Button size='small' href='/login' variant='contained' 
+          sx={{
+            paddingX: 3,
+            margin: 1,
+            color: 'black',
+            fontSize: 12,
+            fontWeight: 'bold'
+            
+          }}>
+            Login
+          </Button>
+          </Box>
 
 
         
@@ -110,7 +140,7 @@ export default function PersistentDrawerLeft() {
           {[
             <Button href='/'>Home</Button>, 
             <Button href='#'>Account</Button>, 
-            <Button href='#'>Token</Button>, 
+            <Button href='#'>Credits: {credit}</Button>, 
             <Button href='#'>New</Button>].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>

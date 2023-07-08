@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Loginpage />} />
-          <Route path='/signup' element={<Signuppage />} />
+          <Route path='/register' element={<Signuppage />} />
           <Route path='/agentdetailpage/:id' element={<Agentdetailpage />} />
         </Routes>
         <Footer />

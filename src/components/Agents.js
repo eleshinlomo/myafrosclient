@@ -101,15 +101,17 @@ const [agents, setAgents] = useState([])
     <div>
     
     <Card sx={{ 
+        
         width: 'auto',
          m:1 ,
          color: '#00FFFF'
          }}>
+         
       <CardHeader
         avatar={
           <Avatar variant='circular' src={agent.image} sx={{ 
-            height: 150,
-            width: 150,
+            height: 250,
+            width: 250,
             
             }} aria-label="recipe" />
             
@@ -120,7 +122,9 @@ const [agents, setAgents] = useState([])
             <MoreVertIcon />
           </IconButton>
         }
-        title={agent.name}
+    
+        title=<Typography variant='h5' sx={{}}>{agent.name} </Typography>
+       
       />
      
       <CardContent>
