@@ -17,6 +17,36 @@ import {
 function Home() {
   const [countAnikaClicks, setCountAnikaClicks] = useState(0)
   const [countChimzyClicks, setCountChimzyClicks] = useState(0)
+  const [users, setUsers] = useState([])
+
+
+  // get all agents
+  const getUsers =async ()=>{
+    await fetch('/api/users/', {
+      mode: 'cors',
+      method: 'GET',
+      headers: {'Content-Type': 'application/json'}
+    })
+    .then((data)=>{
+      if(!data) return null
+      return  data.json()
+    })
+
+    .then((res)=>{
+      console.log(res)
+      setUsers(res)
+
+    }).catch((err)=>{
+      console.log('ERROR:', err)
+    })
+  }
+
+  useEffect(()=>{
+    
+    getUsers()
+
+  }, [])
+
   
 
    // Typewriter text
@@ -73,8 +103,8 @@ function Home() {
         
 
         <Box>
-           <Typography variant='h6'>
-                       <Typewriter text={ "AI POWERED FREELANCERS AT YOUR SERVICE"} />
+           <Typography variant='h7'>
+                       AI POWERED FREELANCERS AT YOUR SERVICE
           </Typography>
                 </Box>
 
@@ -84,7 +114,7 @@ function Home() {
          <Box>
         <Typography>
                  
-                  MEET OUR EMPLOYEES
+                  10X Your Business With AI
                  
                 </Typography>
 

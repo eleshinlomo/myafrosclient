@@ -6,7 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
+import {Typography, ThemeProvider, createTheme} from '@mui/material';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -49,6 +49,8 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   justifyContent: 'flex-end',
 }));
 
+
+
 export default function PersistentDrawerLeft() {
   const theme = useTheme();
   const [open, setOpen] = useState(false);
@@ -81,7 +83,11 @@ export default function PersistentDrawerLeft() {
             MyAfros
           </Button>
 
-          <Box marginLeft='auto'>
+          <Box marginLeft='auto' sx={{
+            [theme.breakpoints.down('lg')]: {
+            display: 'none'
+           }
+          }}>
           <Button>
             Beta
           </Button>
@@ -153,8 +159,11 @@ export default function PersistentDrawerLeft() {
           ))}
         </List>
         <Divider />
-        <List>
-          {['Register', 'Login', 'Rising Freelance AI'].map((text, index) => (
+        <List sx={{
+           
+        }}>
+          {[<Button href='/register'>Register</Button>,
+          <Button href='/login'>Login</Button>, 'Rising Freelance AI'].map((text, index) => (
             <ListItem key={text} disablePadding>
               <ListItemButton>
                 <ListItemIcon>

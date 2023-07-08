@@ -9,7 +9,7 @@ import {Routes, Route} from 'react-router-dom'
 import Home from './pages/Home';
 import Nav from './components/Nav';
 import Loginpage from './pages/Loginpage';
-import Signuppage from './pages/Signuppage';
+import Registerpage from './pages/Registerpage';
 import Agentdetailpage from './pages/Agentdetailpage';
 import Footer from './components/Footer';
 import Menu2 from './components/Menu2'
@@ -31,7 +31,7 @@ function App() {
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Loginpage />} />
-          <Route path='/register' element={<Signuppage />} />
+          <Route path='/register' element={<Registerpage />} />
           <Route path='/agentdetailpage/:id' element={<Agentdetailpage />} />
         </Routes>
         <Footer />

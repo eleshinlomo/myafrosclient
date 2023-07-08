@@ -13,7 +13,7 @@ const Signuppage = () => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
-    const [message, setMessage] = useState('Sign Up')
+    const [message, setMessage] = useState('Register')
     
 
     const handleSignup = async (e) => {

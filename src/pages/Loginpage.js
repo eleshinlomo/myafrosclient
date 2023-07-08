@@ -10,47 +10,46 @@ import {Box, ThemeProvider,
 
 const Loginpage = () => {
 
-    const [username, setUsername] = useState('')
-    const [password, setPassword] = useState('')
     const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
     const [message, setMessage] = useState('Login')
     
 
-    const handleLogin = async (e)=>{
-        e.preventDefault()
-        
-        await fetch('http://localhost:8000/members/loginmember/', {
-        method: 'POST',
-        mode: 'cors',
-        headers: {
-            'Content-Type': 'application/json',
-            
-        },
-        body: JSON.stringify({
+    const handleLogin = async (e) => {
+        e.preventDefault();
+      
+        const csrftoken = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("csrftoken="))
+          .split("=")[1];
+      
+        await fetch("/api/login/", {
+          method: "POST",
+          mode: "cors",
+          headers: {
+            "Content-Type": "application/json",
+            "X-CSRFToken": csrftoken,
+          },
+          body: JSON.stringify({
             email,
             password,
             
+          }),
         })
-      })
-
-      .then((data)=>{
-        if(!data) return
-        return data.json()
-      })
+          .then((data) => {
+            if (!data) return;
+            return data.json();
+          })
+          .then((res) => {
+              console.log(res)
+              setMessage(res.message);
+          })
+          .catch((err) => {
+            console.log(err.message);
+            
+          });
+      };
       
-      .then((res)=>{
-        console.log(res)
-        setEmail('')
-        setPassword('')
-        setMessage(res.message)
-        return
-        
-      })
-      .catch((err)=>{
-        console.log(err.message)
-        setMessage(err.message)
-      })
-    }
     
     
 
@@ -65,17 +64,15 @@ const Loginpage = () => {
             paddingY: 5,
 
         }}>
-
-        {/* message */}
         <Typography>
             <h3>{message}</h3>
         </Typography>
-
-
        <form onSubmit={handleLogin}>
-           
-           {/* email */}
-        <Input 
+
+     
+
+     {/* email */}
+     <Input 
             type='email' 
             onChange={(e)=>setEmail(e.target.value)}
             value={email}
@@ -89,7 +86,7 @@ const Loginpage = () => {
               textAlign: 'center'
             }}
             /><br/>
-        
+
 
             {/* password */}
 
@@ -109,14 +106,14 @@ const Loginpage = () => {
             /><br/>
 
        
-            <Button type='submit' variant='contained' sx={{
+            <Button size='small' type='submit' variant='contained' sx={{
               width: 12,
               paddingX: 12,
               backgroundColor: '#00FFFF',
               color: 'black',
               fontSize: 16
               
-            }}>Login</Button>
+            }}>Register</Button>
         </form>
         </Box>
         </Grid>
