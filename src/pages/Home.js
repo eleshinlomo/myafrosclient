@@ -22,7 +22,7 @@ function Home() {
 
   // get all agents
   const getUsers =async ()=>{
-    await fetch('/api/users/', {
+    await fetch('https://myafrosserver.vercel.app/api/users/', {
       mode: 'cors',
       method: 'GET',
       headers: {'Content-Type': 'application/json'}
