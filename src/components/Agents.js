@@ -9,13 +9,14 @@ import CardActions from '@mui/material/CardActions';
 import Collapse from '@mui/material/Collapse';
 import Avatar from '@mui/material/Avatar';
 import IconButton from '@mui/material/IconButton';
-import {Typography, Button} from '@mui/material';
+import {Typography, Button, Box, ThemeProvider, createTheme, Grid} from '@mui/material';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Rating from '../components/Rating';
+import '../App.css'
 
 
 const ExpandMore = styled((props) => {
@@ -39,7 +40,7 @@ const [agents, setAgents] = useState([])
     
 // get all agents
   const getAgents =async ()=>{
-    await fetch('https://myafrosserver.vercel.app/api/agents/', {
+    await fetch('/api/agents/', {
       mode: 'cors',
       method: 'GET',
       headers: {'Content-Type': 'application/json'}
@@ -93,79 +94,61 @@ const [agents, setAgents] = useState([])
     setExpanded(!expanded);
   };
 
+  const theme = createTheme({
+    palette: {
+      mode: 'dark'
+    }
+  });
+
   return (
 <div>
-
+<Grid container>
+<Grid item display='flex' flex gap={3} justifyContent='center' alignItems='center' xs={12} sm={12} md={12} lg={12} xl={12}
+sx={{
+    [theme.breakpoints.down('lg')]: {
+        flexDirection: 'column'
+    }
+}}>
     {agents.map((agent)=>
     
-    <div>
+    <div className='' key={agent.id}>
     
-    <Card sx={{ 
-        
-        width: 'auto',
-         m:1 ,
-         color: '#00FFFF'
-         }}>
-         
+    <Card sx={{width: 350, height: 'auto'}}>
+    
       <CardHeader
-        avatar={
-          <Avatar variant='circular' src={agent.image} sx={{ 
-            height: 250,
-            width: 250,
-            
-            }} aria-label="recipe" />
-            
-          
-        }
-        action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
-          </IconButton>
-        }
-    
-        title=<Typography variant='h5' sx={{}}>{agent.name} </Typography>
-       
+      
+        title={agent.name}
+        subheader={agent.brief}
       />
-     
-      <CardContent>
-        <Typography variant="body1">
-          {agent.brief}
-        </Typography>
-      </CardContent>
-      <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
-          <FavoriteIcon />
-        </IconButton>
-        <IconButton aria-label="share">
-          <ShareIcon />
-        </IconButton>
-
-         <Link to={`/agentdetailpage/${agent.id}`}>
-         <Button variant='contained'>GET STARTED</Button>
-         </Link>
+      <CardMedia
+        component="img"
+        height="294"
+        image={agent.image}
+        alt="AI Agent"
+        className=''
+    
         
-
-        <ExpandMore
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandMoreIcon />
-        </ExpandMore>
-      </CardActions>
-      <Collapse in={expanded} timeout="auto" unmountOnExit>
-        <CardContent>
-
-          <Typography paragraph>
-            {agent.profile}
-          </Typography>
-        </CardContent>
-      </Collapse>
+      />
+      <CardContent sx={{
+        m:2
+      }}>
+        <Typography variant="body2" color="text.secondary">
+          {agent.profile}
+        </Typography>
+        <Box sx={{m:1}}>
+        <Link to={`/agentdetailpage/${agent.id}`}><Button variant='contained'>GET STARTED</Button></Link>
+        </Box>
+      </CardContent>
+     
+      
+      
+      
     </Card>
     
     </div>)
     }
+    </Grid>
+    </Grid>
     </div>
   );
 }
