@@ -1,7 +1,21 @@
 import React from 'react'
 import { Grid, Typography, Button, Box,createTheme, ThemeProvider } from '@mui/material'
-
+import {Link} from 'react-router-dom'
 const Footer = () => {
+
+  function Copyright() {
+    return (
+      <Typography variant="body2" color="text.secondary" align="center">
+        {'Copyright © '}
+        <Link color="inherit" href="https://myafros.com/">
+          My Afros
+        </Link>{' '}
+        {new Date().getFullYear()}
+        {'.'}
+      </Typography>
+    );
+  }
+
   const theme = createTheme({
     palette: {
       mode: 'dark'
@@ -11,51 +25,21 @@ const Footer = () => {
     
     <div>
     <ThemeProvider theme={theme}>
-        <Grid container  sx={{
-    
-            color: '#00FFFF',
-            justifyContent: 'center',
-            alignItems: 'center',
-            p:2,
-            paddingY: 4,
-            borderTop: '2px solid  #00FFFF',
-            
-        }}>
-
-        <Grid container justifyContent='space-between' sx={{
-          [theme.breakpoints.down('lg')]: {
-              display: 'block',
-              textAlign: 'center'
-            }
-        }}>
-
-        <Grid item>
-          Privacy Policy
-        </Grid>
-
+       
+    <Box sx={{ bgcolor: 'background.paper', p: 6 }} component="footer">
         
+        <Typography
+          variant="subtitle1"
+          align="center"
+          color="text.secondary"
+          component="p"
+        >
+          Experience the unthinkable with My Afros!
+        </Typography>
+        <Copyright />
+      </Box>
+      {/* End footer */}
 
-        <Grid item>
-          <Box>
-            <Button>Home</Button>
-            <Button>Contact us</Button>
-            <Button>About us</Button>
-          </Box>
-        </Grid>
-
-        </Grid>
-
-        <Box sx={{
-          align: 'center'
-        }} >
-        <Typography sx={{
-            textAlign: 'center'
-        }}>
-          Copyright 2023. MyAfros.
-          </Typography>
-        </Box>
-
-        </Grid>
         </ThemeProvider>
     </div>
   )

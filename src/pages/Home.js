@@ -1,28 +1,36 @@
-import React, { useState, useEffect } from 'react';
-import {Link} from 'react-router-dom'
-import '../App.css'
-import Test from '../components/Test'
-import Agents from '../components/Agents'
-import {
-  Box,
-  ThemeProvider,
-  Grid,
-  Typography,
-  createTheme,
-  Button,
-  Paper,
-  Input
-} from '@mui/material';
+import React, {useState, useEffect} from 'react';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import CameraIcon from '@mui/icons-material/PhotoCamera';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Agents from '../components/Agents';
 
-function Home() {
-  const [countAnikaClicks, setCountAnikaClicks] = useState(0)
-  const [countChimzyClicks, setCountChimzyClicks] = useState(0)
-  const [users, setUsers] = useState([])
 
+
+
+
+
+
+export default function Home() {
 
   // get all agents
-  const getUsers =async ()=>{
-    await fetch('https://myafrosserver.vercel.app/api/users/', {
+  const [agents, setAgents] = useState([])
+  
+
+  const getAgents =async ()=>{
+    await fetch('/api/agents/', {
       mode: 'cors',
       method: 'GET',
       headers: {'Content-Type': 'application/json'}
@@ -34,7 +42,7 @@ function Home() {
 
     .then((res)=>{
       console.log(res)
-      setUsers(res)
+      setAgents(res)
 
     }).catch((err)=>{
       console.log('ERROR:', err)
@@ -43,18 +51,15 @@ function Home() {
 
   useEffect(()=>{
     
-    getUsers()
+    getAgents()
 
   }, [])
 
-  
-
-   // Typewriter text
+  // Typewriter text
 
   const Typewriter = ({ text }) => {
     const [currentText, setCurrentText] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
-    
   
     useEffect(() => {
       let timer;
@@ -70,94 +75,99 @@ function Home() {
   
     return <h3>{currentText}</h3>;
   };
-
-
-
   
-
-  const theme = createTheme({
-    palette: {
-      mode: 'dark'
-    }
-  });
+  
+const defaultTheme = createTheme({
+  palette: {
+    mode: 'dark'
+  }
+});
 
   return (
-    <div className="">
-      <ThemeProvider theme={theme}>
-       
-     <Grid contianer>
-        <Grid item  display='flex'  sx={{
-          color: '#00FFFF',
-          mt: 8
-        }}>
+    <ThemeProvider theme={defaultTheme}>
+      <CssBaseline />
+     
+      <main>
+        {/* Hero unit */}
+        <Box
+          sx={{
+            bgcolor: 'background.paper',
+            pt: 8,
+            pb: 6,
+          }}
+        >
+          <Container maxWidth="sm">
+            <Typography
+              component="h1"
+              variant="h4"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              AI FRELANCERS AT YOUR SERVICE 24/7
+            </Typography>
+            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+              My Afros is an AI powered freelancing web platform. 
+              A place to get every task done using Artificial Intelligence technology.
+              Our Agents have been trained with one of the best Prompt Engineering techniques.
+            </Typography>
+            <Stack
+              sx={{ pt: 4 }}
+              direction="row"
+              spacing={2}
+              justifyContent="center"
+            >
+              <Button variant="contained">GET STARTED</Button>
+              <Button variant="outlined">UPCOMING FREELANCE AGENTS</Button>
+            </Stack>
+          </Container>
+        </Box>
+        {/* End hero unit */}
 
-        <Box sx={{
-          width: '100%',
-          textAlign: 'center'
-        }}>
+{/* agents unit */}
+        <Container sx={{ py: 8 }} maxWidth="xl">
 
+          <Grid container spacing={4} >
+            {agents.map((agent) => (
+                <Grid item xs={12} sm={6} md={4}>
+<Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <CardMedia
+            component="div"
+            sx={{
+              // 16:9
+              pt: '56.25%',
+            }}
+            image={agent.image}
+          />
+          <CardContent sx={{ flexGrow: 1 }}>
+            <Typography gutterBottom variant="h5" component="h2">
+              {agent.name}
+            </Typography>
+            <Typography gutterBottom variant="body1" component="h5" color='blue'>
+              {agent.brief}
+            </Typography>
+            <Typography>
+              {agent.profile}
+            </Typography>
+          </CardContent>
+          <CardActions>
+            
+            <Button href={`/agentdetailpage/${agent.id}`} size="small">TRANSLATE</Button>
+            
 
-        {/* header */}
-        <Box>
-         
-        
+            <Button size="small">MEET {agent.name}</Button>
+          </CardActions>
+        </Card>
+                
+              </Grid>
+              ))}
+          </Grid>
+          
+          {/* End agents unit */}
 
-        <Box>
-           <Typography variant='h7'>
-                       AI POWERED FREELANCERS AT YOUR SERVICE
-          </Typography>
-                </Box>
-
-                </Box>
-         
-         {/* main */}
-         <Box>
-        <Typography>
-                 
-                  10X Your Business With AI
-                 
-                </Typography>
-
-                </Box>
-
-                <Box>
-                  <Agents />
-                </Box>
-
-               
-        
-      
-
-
-
-                  <Box>
-                 <Typography sx={{
-                  margin: 3,
-                  fontSize:18,
-                  fontWeight: 'bold'
-                  }}>
-                  WHAT'S NEW
-                 </Typography>
-                  </Box>
-
-                  <Box xl={4} sx={{
-                    
-                  }}>
-  <h3>Anika Clicks: {countAnikaClicks}</h3>
-  <h3>Chimzy Clicks: {countChimzyClicks}</h3>
-</Box>
-
- 
-
-</Box>
-
-
-
-        </Grid>
-        </Grid>
-      </ThemeProvider>
-    </div>
+        </Container>
+      </main>
+     
+    </ThemeProvider>
   );
 }
-
-export default Home;

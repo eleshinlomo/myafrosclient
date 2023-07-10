@@ -1,44 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom'
-import { styled } from '@mui/material/styles';
+import React, {useState, useEffect} from 'react';
+import AppBar from '@mui/material/AppBar';
+import Button from '@mui/material/Button';
+import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
-import CardHeader from '@mui/material/CardHeader';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
-import Collapse from '@mui/material/Collapse';
-import Avatar from '@mui/material/Avatar';
-import IconButton from '@mui/material/IconButton';
-import {Typography, Button, Box, ThemeProvider, createTheme, Grid} from '@mui/material';
-import { red } from '@mui/material/colors';
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import ShareIcon from '@mui/icons-material/Share';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
-import Rating from '../components/Rating';
-import '../App.css'
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+const Agents = () => {
 
-const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
-  return <IconButton {...other} />;
-})(({ theme, expand }) => ({
-  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
-  marginLeft: 'auto',
-  transition: theme.transitions.create('transform', {
-    duration: theme.transitions.duration.shortest,
-  }),
-}));
-
-export default function Agents() {
-
-const [agents, setAgents] = useState([])
+    // get all agents
+    const [agents, setAgents] = useState([])
   const [test, setTest] = useState(null)
-  
-  
 
-    
-// get all agents
   const getAgents =async ()=>{
     await fetch('/api/agents/', {
       mode: 'cors',
@@ -65,90 +48,53 @@ const [agents, setAgents] = useState([])
 
   }, [])
 
-
-  // Typewriter text
-
-  const Typewriter = ({ text }) => {
-    const [currentText, setCurrentText] = useState('');
-    const [currentIndex, setCurrentIndex] = useState(0);
-  
-    useEffect(() => {
-      let timer;
-      if (text && currentIndex < text.length) {
-        timer = setInterval(() => {
-          setCurrentText((prevText) => prevText + text[currentIndex]);
-          setCurrentIndex((prevIndex) => prevIndex + 1);
-        }, Math.random() * 200 + 50);
-      }
-  
-      return () => clearInterval(timer);
-    }, [currentIndex, text]);
-  
-    return <h3>{currentText}</h3>;
-  };
-  
-
-  const [expanded, setExpanded] = React.useState(false);
-
-  const handleExpandClick = () => {
-    setExpanded(!expanded);
-  };
-
   const theme = createTheme({
-    palette: {
-      mode: 'dark'
+    palette:{
+        mode: 'dark'
     }
-  });
+  })
+
 
   return (
-<div>
-<Grid container>
-<Grid item display='flex' flex gap={3} justifyContent='center' alignItems='center' xs={12} sm={12} md={12} lg={12} xl={12}
-sx={{
-    [theme.breakpoints.down('lg')]: {
-        flexDirection: 'column'
-    }
-}}>
-    {agents.map((agent)=>
+    <ThemeProvider theme={theme}>
+    <CssBaseline />
+<Grid container spacing={2}>
+{agents.map((agent) => (
+    <Grid item key={agent.id}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+        <Card>
+                  <CardMedia
+                    component="div"
+                    sx={{
+                      // 16:9
+                      pt: '56.25%',
+                    }}
+                    image={agent.image}
+                  />
+                  <CardContent sx={{ flexGrow: 1 }}>
+                    <Typography gutterBottom variant="h5" component="h2">
+                      {agent.name}
+                    </Typography>
+                    <Typography gutterBottom variant="body1" component="h5" color='blue'>
+                      {agent.brief}
+                    </Typography>
+                    <Typography>
+                      {agent.profile}
+                    </Typography>
+                  </CardContent>
+                  <CardActions>
+                    <Button size="small">TRANSLATE</Button>
+                    <Button size="small">MEET {agent.name}</Button>
+                  </CardActions>
+                </Card>
+                </Box>
+                
+                </Grid>
+    ))}
     
-    <div className='' key={agent.id}>
-    
-    <Card sx={{width: 350, height: 'auto'}}>
-    
-      <CardHeader
-      
-        title={agent.name}
-        subheader={agent.brief}
-      />
-      <CardMedia
-        component="img"
-        height="294"
-        image={agent.image}
-        alt="AI Agent"
-        className=''
-    
-        
-      />
-      <CardContent sx={{
-        m:2
-      }}>
-        <Typography variant="body2" color="text.secondary">
-          {agent.profile}
-        </Typography>
-        <Box sx={{m:1}}>
-        <Link to={`/agentdetailpage/${agent.id}`}><Button variant='contained'>GET STARTED</Button></Link>
-        </Box>
-      </CardContent>
-     
-      
-      
-      
-    </Card>
-    
-    </div>)
-    }
-    </Grid>
-    </Grid>
-    </div>
-  );
+    </Grid>  
+    </ThemeProvider>
+  )
 }
+
+export default Agents
