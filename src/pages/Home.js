@@ -124,6 +124,26 @@ const defaultTheme = createTheme({
         </Box>
         {/* End hero unit */}
 
+        {/* important message */}
+
+        <Box >
+          <Container maxWidth='sm' sx={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          flexDirection: 'column'
+        }}>
+          <Typography>
+            While we wait for the parent domain to propagate and provision
+             changes to database , 
+            please use temporary domain
+          </Typography>
+          <Button href='https://myafrosclient.vercel.app' variant='contained'>CLICK HERE</Button>
+          </Container>
+        </Box>
+
+        {/* end important message */}
+
 {/* agents unit */}
         <Container sx={{ py: 8 }} maxWidth="xl">
 
@@ -169,6 +189,8 @@ const defaultTheme = createTheme({
           {/* End agents unit */}
 
         </Container>
+
+        
       </main>
      
     </ThemeProvider>
