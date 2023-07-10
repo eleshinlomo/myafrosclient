@@ -136,8 +136,11 @@ const defaultTheme = createTheme({
             sx={{
               // 16:9
               pt: '56.25%',
+         
             }}
-            image={agent.image}
+
+            image = {`/media/${agent.url}`}
+            
           />
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2">
