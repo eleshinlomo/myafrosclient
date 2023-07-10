@@ -9,7 +9,6 @@ const Aidetailpage = () => {
   const [isSpanish, setIsSpanish] = useState(false)
   const [spanishResponse, setSpanishResponse] = useState(null)
   const [fetchCompleted, setFetchCompleted] = useState(false);
-  const [isEnglish, setIsEnglish] = useState(false)
   const [user_input, setUser_input] = useState('')
   const [message, setMessage] = useState()
   const [text, setText] = useState('')
@@ -27,7 +26,7 @@ const Aidetailpage = () => {
       setAgent(data);
       if(data.name === 'Anika')
         setIsSpanish(true)
-      if(data.name === 'Chimzy')
+      if(data.name === 'Linda')
         setIsEnglish(true)
       
     } catch (error) {
@@ -42,6 +41,9 @@ const Aidetailpage = () => {
 
 
   // english translator
+  const [isEnglish, setIsEnglish] = useState(false)
+  const [englishResponse, setEnglishResponse] = useState(false)
+
   const englishTranslator = async (e) => {
     e.preventDefault();
 
@@ -58,7 +60,7 @@ const Aidetailpage = () => {
       });
 
       const data = await response.json();
-      setSpanishResponse(data.generated_text);
+      setEnglishResponse(data.generated_text);
       setFetchCompleted(true);
     } catch (err) {
       console.log(err);
@@ -170,7 +172,7 @@ const theme = createTheme({
       
 
 
-{/* if spanish agent */}
+
   
       <Grid item  sx={{
         color: '#00FFFF',
@@ -188,12 +190,13 @@ const theme = createTheme({
           Just so you know, I have been capped at 30 tokens.<br/>
           This means I cannot give long responses.<br/>
            You may wish to 
-          <Button href='/signup'>Sign Up</Button> or 
+          <Button href='/register'>Sign Up</Button> or 
           <Button href='/login'>Login</Button> to get free credits for uncapped
           responses.
         </Typography>
       </Box>
 
+{/* if spanish agent */}
       {isSpanish && (
         <Box>
         
@@ -230,6 +233,46 @@ const theme = createTheme({
       
           </Box>
           )}
+
+{/* IS English */}
+
+          {isEnglish && (
+        <Box>
+        
+          <form onSubmit={englishTranslator}>
+            <Input value={user_input} name='user_input'onChange={(e)=>setUser_input(e.target.value)} 
+            placeholder='I will translate to English'
+            sx={{
+              borderBottom: '2px solid #00FFFF',
+              mr:3,
+              color: 'white',
+              width: '15rem'
+      
+            }}
+             />
+             
+            <Button type="submit" variant="contained" sx={{
+              bgcolor: '#00FFFF',
+              color: 'black'
+            }}>
+              Translate
+            </Button>
+          </form>
+
+          
+          
+              <Typography>
+             
+               <Typewriter text={englishResponse} />
+              
+              </Typography>
+             
+            
+          
+      
+          </Box>
+          )}
+
           </Box>
         
       
