@@ -18,7 +18,7 @@ const Aidetailpage = () => {
   const getAgent = async () => {
     if (!id) return null;
     try {
-      const response = await fetch(`/api/agent/${id}/`, {
+      const response = await fetch(`https://myafrosserver.vercel.app/api/agent/${id}/`, {
         mode: 'cors',
         method: 'GET',
         headers: { 'Content-Type': 'application/json' },
@@ -41,6 +41,32 @@ const Aidetailpage = () => {
 
 
 
+  // english translator
+  const englishTranslator = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch('https://myafrosserver.vercel.app/api/english/', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          user_input
+        })
+      });
+
+      const data = await response.json();
+      setSpanishResponse(data.generated_text);
+      setFetchCompleted(true);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+
+// spanish translator
   const spanishTranslator = async (e) => {
     e.preventDefault();
 
@@ -65,10 +91,7 @@ const Aidetailpage = () => {
   };
 
 
-  useEffect(() => {
-    getAgent();
-  
-  }, []);
+ 
 
 
 
