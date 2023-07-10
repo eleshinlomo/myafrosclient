@@ -30,7 +30,7 @@ export default function Home() {
   
 
   const getAgents =async ()=>{
-    await fetch('/api/agents/', {
+    await fetch('https://myafrosserver.vercel.app/api/agents/', {
       mode: 'cors',
       method: 'GET',
       headers: {'Content-Type': 'application/json'}
