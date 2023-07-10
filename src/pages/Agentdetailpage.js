@@ -45,7 +45,7 @@ const Aidetailpage = () => {
     e.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8000/spanishagent/translate_to_spanish/', {
+      const response = await fetch('https://myafrosserver.vercel.app/spanishagent/translate_to_spanish/', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -105,33 +105,35 @@ const theme = createTheme({
   return (
     <div>
     <ThemeProvider theme={theme}>
-    <Grid container xl={12} display='flex'  justifyContent='space-between' alignItems='center' sx={{
+    <Grid container spacing={8}   justifyContent='center' alignItems='center' sx={{
   
         color: '#00FFFF',
+        m:2,
         [theme.breakpoints.down('md')]: {
-          display: 'block'
+          display: 'block',
+          m: 1,
+          py: 4,
+          px: 2
         }
 
     
     }}>
 
-      <Grid item xl={6} sx={{
-       
+      <Grid item  sx={{
+        
       }}>
 
       {agent && (
-        <Box>
-        <Typography sx={{
-          ml:5
+        <Box sx={{
+          mt:5
         }}>
+        <Typography >
         <h3>{`${agent.name} here, How can I help you today?`}</h3>
         </Typography>
         <Box sx={{
-          height: 600,
-          width: 300,
+          
           [theme.breakpoints.down('md')]: {
-            height: 250,
-            width: 250
+            
           }
         }}>
           <img src={agent.image} className='img' alt="ai" />
@@ -147,21 +149,22 @@ const theme = createTheme({
 
 {/* if spanish agent */}
   
-      <Grid item xl={6} sx={{
+      <Grid item  sx={{
         color: '#00FFFF',
         
       }}>
 
       <Box >
 
-<Box>
-        <Typography sx={{
-          mb: 5,
-          mr: 5,
-          p: 'auto'
+<Box sx={{
+          
+          mt: 5,
+          
         }}>
-          Just so you know, I have been capped at 30 tokens. 
-          This means I cannot give long responses. You may wish to 
+        <Typography paragraph >
+          Just so you know, I have been capped at 30 tokens.<br/>
+          This means I cannot give long responses.<br/>
+           You may wish to 
           <Button href='/signup'>Sign Up</Button> or 
           <Button href='/login'>Login</Button> to get free credits for uncapped
           responses.
@@ -191,13 +194,16 @@ const theme = createTheme({
             </Button>
           </form>
 
+          
           {fetchCompleted && (
-            <Box>
               <Typography>
-               {spanishResponse &&  <Typewriter text={spanishResponse} />}
+             
+               {spanishResponse && (<Typewriter text={spanishResponse} />)}
+              
               </Typography>
-            </Box>
-          )}
+             )}
+            
+          
       
           </Box>
           )}
