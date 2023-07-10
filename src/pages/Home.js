@@ -155,7 +155,7 @@ const defaultTheme = createTheme({
           </CardContent>
           <CardActions>
             
-            <Button href={`/agentdetailpage/${agent.id}`} size="small">TRANSLATE</Button>
+            <Button href={`/agentdetailpage/${agent.id}`} variant='contained' size="small">GET STARTED</Button>
             
 
             <Button size="small">MEET {agent.name}</Button>
