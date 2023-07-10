@@ -129,7 +129,7 @@ const defaultTheme = createTheme({
 
           <Grid container spacing={4} >
             {agents.map((agent) => (
-                <Grid item xs={12} sm={6} md={4}>
+                <Grid item key={agent.id} xs={12} sm={6} md={4}>
 <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
           <CardMedia
             component="div"

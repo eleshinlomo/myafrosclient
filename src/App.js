@@ -12,7 +12,7 @@ import Loginpage from './pages/Loginpage';
 import Registerpage from './pages/Registerpage';
 import Agentdetailpage from './pages/Agentdetailpage';
 import Footer from './components/Footer';
-import Menu2 from './components/Menu2'
+
 
 
 function App() {
@@ -27,7 +27,7 @@ function App() {
 
     <div className="">
     <ThemeProvider theme={theme}>
-      <Menu2 />
+      <Nav />
         <Routes>
           <Route exact path='/' element={<Home />} />
           <Route path='/login' element={<Loginpage />} />
