@@ -169,7 +169,7 @@ const theme = createTheme({
          
             }}
 
-            image = {`https://myafrosserver.vercel.app/${agent.image}`}
+            image = {`/media/${agent.image}`}
             
           />
           <CardContent sx={{ flexGrow: 1 }}>
