@@ -98,7 +98,7 @@ const theme = createTheme({
         >
           <Container maxWidth="sm">
             <Typography
-              component="h2"
+              component="h3"
               variant="h5"
               align="center"
               color="text.primary"
@@ -106,7 +106,7 @@ const theme = createTheme({
             >
               AI FRELANCERS AT YOUR SERVICE 24/7
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph sx={{
+            <Typography variant="h6" align="center" color="text.secondary" paragraph sx={{
               [theme.breakpoints.down('md')]:{
                 variant: 'body1'
               }
@@ -137,9 +137,9 @@ const theme = createTheme({
           alignItems: 'center',
           flexDirection: 'column'
         }}>
-          <Typography>
+          <Typography paragraph align="center" color="text.secondary" >
             While we wait for the parent domain to propagate and provision
-             changes to database , 
+             changes to database, 
             please use temporary domain
           </Typography>
           <Button href='https://myafrosclient.vercel.app' variant='contained'>CLICK HERE</Button>

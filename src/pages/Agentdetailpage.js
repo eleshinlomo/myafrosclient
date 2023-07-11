@@ -26,6 +26,7 @@ const Aidetailpage = () => {
   const [user_input, setUser_input] = useState('')
   const [message, setMessage] = useState()
   const [text, setText] = useState('')
+  const [dalle, setDalle] = useState(false)
   const { id } = useParams();
 
   const getAgent = async () => {
@@ -42,6 +43,8 @@ const Aidetailpage = () => {
         setIsSpanish(true)
       if(data.name === 'Linda')
         setIsEnglish(true)
+      if(data.name === 'Mark')
+        setDalle(true)
       
     } catch (error) {
       console.log('ERROR:', error);
