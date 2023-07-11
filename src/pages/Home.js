@@ -138,7 +138,7 @@ const defaultTheme = createTheme({
              changes to database , 
             please use temporary domain
           </Typography>
-          <Button href='https://myafrosfrontend.vercel.app' variant='contained'>CLICK HERE</Button>
+          <Button href='https://myafrosclient.vercel.app' variant='contained'>CLICK HERE</Button>
           </Container>
         </Box>
 
