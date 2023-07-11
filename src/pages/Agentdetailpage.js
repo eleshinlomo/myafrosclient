@@ -144,6 +144,7 @@ const theme = createTheme({
   return (
     <div>
     <ThemeProvider theme={theme}>
+    <CssBaseline />
     <Grid container justifyContent='center' alignItems='center'>
 
      
