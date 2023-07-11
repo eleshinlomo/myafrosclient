@@ -77,14 +77,14 @@ export default function Home() {
   };
   
   
-const defaultTheme = createTheme({
+const theme = createTheme({
   palette: {
     mode: 'dark'
   }
 });
 
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <ThemeProvider theme={theme}>
       <CssBaseline />
      
       <main>
@@ -98,15 +98,19 @@ const defaultTheme = createTheme({
         >
           <Container maxWidth="sm">
             <Typography
-              component="h1"
-              variant="h4"
+              component="h2"
+              variant="h5"
               align="center"
               color="text.primary"
               gutterBottom
             >
               AI FRELANCERS AT YOUR SERVICE 24/7
             </Typography>
-            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+            <Typography variant="h5" align="center" color="text.secondary" paragraph sx={{
+              [theme.breakpoints.down('md')]:{
+                variant: 'body1'
+              }
+            }}>
               My Afros is an AI powered freelancing web platform. 
               A place to get every task done using Artificial Intelligence technology.
               Our Agents have been trained with one of the best Prompt Engineering techniques.

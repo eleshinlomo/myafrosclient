@@ -1,8 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import { Box, Typography, Input, Button, Grid} from '@mui/material';
-import '../App.css'
-import { createTheme, ThemeProvider } from '@mui/material';
+import React, {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom'
+import AppBar from '@mui/material/AppBar';
+import {Button, Input} from '@mui/material';
+import CameraIcon from '@mui/icons-material/PhotoCamera';
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import CardMedia from '@mui/material/CardMedia';
+import CssBaseline from '@mui/material/CssBaseline';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Box from '@mui/material/Box';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import Container from '@mui/material/Container';
+import Link from '@mui/material/Link';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Agents from '../components/Agents';
 
 const Aidetailpage = () => {
   const [agent, setAgent] = useState(null);
@@ -130,63 +144,35 @@ const theme = createTheme({
   return (
     <div>
     <ThemeProvider theme={theme}>
-    <Grid container spacing={8}   justifyContent='center' alignItems='center' sx={{
-  
-        color: '#00FFFF',
-        m:2,
-        [theme.breakpoints.down('md')]: {
-          display: 'block',
-          m: 1,
-          py: 4,
-          px: 2
-        }
+    <Grid container justifyContent='center' alignItems='center'>
 
-    
-    }}>
-
-      <Grid item  sx={{
-        
-      }}>
+     
 
       {agent && (
-        <Box sx={{
-          mt:5
+        <Grid sx={{
+           mt: 6
         }}>
-        <Typography >
-        <h3>{`${agent.name} here, How can I help you today?`}</h3>
-        </Typography>
-        <Box sx={{
-          
-          [theme.breakpoints.down('md')]: {
-            
-          }
-        }}>
-          <img src={agent.image} className='img' alt="ai" />
-          </Box>
-        </Box>
-      )}
-      </Grid>
-
-
-
-      
-
-
-
   
-      <Grid item  sx={{
-        color: '#00FFFF',
-        
-      }}>
 
-      <Box >
+          <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
+          <CardContent>
+          <Typography>
+        <h3>{`${agent.name} here, How may I help you today?`}</h3>
+        </Typography>
+          </CardContent>
+          <CardMedia
+            component="div"
+            sx={{
+              // 16:9
+              pt: '56.25%',
+         
+            }}
 
-<Box sx={{
-          
-          mt: 5,
-          
-        }}>
-        <Typography paragraph >
+            image = {`https://myafrosserver.vercel.app/${agent.image}`}
+            
+          />
+          <CardContent sx={{ flexGrow: 1 }}>
+          <Typography paragraph >
           Just so you know, I have been capped at 30 tokens.<br/>
           This means I cannot give long responses.<br/>
            You may wish to 
@@ -194,9 +180,9 @@ const theme = createTheme({
           <Button href='/login'>Login</Button> to get free credits for uncapped
           responses.
         </Typography>
-      </Box>
 
-{/* if spanish agent */}
+            
+              {/* if spanish agent */}
       {isSpanish && (
         <Box>
         
@@ -205,9 +191,9 @@ const theme = createTheme({
             placeholder='I will translate to Spanish'
             sx={{
               borderBottom: '2px solid #00FFFF',
-              mr:3,
+              
               color: 'white',
-              width: '15rem'
+              
       
             }}
              />
@@ -222,7 +208,7 @@ const theme = createTheme({
 
           
           {fetchCompleted && (
-              <Typography>
+            <Typography gutterBottom variant="body1" component="h5" color='blue'>
              
                {spanishResponse && (<Typewriter text={spanishResponse} />)}
               
@@ -234,7 +220,9 @@ const theme = createTheme({
           </Box>
           )}
 
-{/* IS English */}
+
+
+          {/* IS English */}
 
           {isEnglish && (
         <Box>
@@ -244,9 +232,9 @@ const theme = createTheme({
             placeholder='I will translate to English'
             sx={{
               borderBottom: '2px solid #00FFFF',
-              mr:3,
+              
               color: 'white',
-              width: '15rem'
+              
       
             }}
              />
@@ -261,11 +249,13 @@ const theme = createTheme({
 
           
           
-              <Typography>
+          {fetchCompleted && (
+            <Typography gutterBottom variant="body1" component="h5" color='blue'>
              
-               <Typewriter text={englishResponse} />
+               {englishResponse && (<Typewriter text={englishResponse} />)}
               
               </Typography>
+             )}
              
             
           
@@ -273,16 +263,16 @@ const theme = createTheme({
           </Box>
           )}
 
-          </Box>
+      
+            
+          </CardContent>
+          
+        </Card>
         
       
       </Grid>
+      )}
       
-
-
-      
-    
-
 </Grid>
 </ThemeProvider>
     </div>
