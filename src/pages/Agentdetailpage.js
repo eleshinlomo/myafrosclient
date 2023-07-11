@@ -154,12 +154,15 @@ const theme = createTheme({
 
       {agent && (
         <Grid sx={{
-           mt: 6
+           
         }}>
   
 
-          <Card sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-          <CardContent>
+          <Card sx={{ display: 'flex', flexDirection: 'column', 
+          height: '100%',
+         
+          }}>
+          <CardContent sx={{ mt: 6}}>
           <Typography>
         <h3>{`${agent.name} here, How may I help you today?`}</h3>
         </Typography>
@@ -168,11 +171,11 @@ const theme = createTheme({
             component="div"
             sx={{
               // 16:9
-              pt: '56.25%',
+              pt: '76.25%',
          
             }}
 
-            image = {`/media/${agent.image}`}
+            image = {agent.image}
             
           />
           <CardContent sx={{ flexGrow: 1 }}>
@@ -190,13 +193,14 @@ const theme = createTheme({
       {isSpanish && (
         <Box>
         
-          <form onSubmit={spanishTranslator}>
+          <form onSubmit={spanishTranslator} width='100%'>
             <Input value={user_input} name='user_input'onChange={(e)=>setUser_input(e.target.value)} 
             placeholder='I will translate to Spanish'
             sx={{
               borderBottom: '2px solid #00FFFF',
               
               color: 'white',
+              pr:1
               
       
             }}

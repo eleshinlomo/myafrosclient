@@ -94,6 +94,7 @@ const theme = createTheme({
             bgcolor: 'background.paper',
             pt: 8,
             pb: 6,
+            
           }}
         >
           <Container maxWidth="sm">
@@ -159,18 +160,18 @@ const theme = createTheme({
             component="div"
             sx={{
               // 16:9
-              pt: '56.25%',
+              pt: '76.25%',
          
             }}
 
-            image = {`/media/${agent.image}`}
+            image = {agent.image}
             
           />
           <CardContent sx={{ flexGrow: 1 }}>
             <Typography gutterBottom variant="h5" component="h2">
               {agent.name}
             </Typography>
-            <Typography gutterBottom variant="body1" component="h5" color='blue'>
+            <Typography gutterBottom variant="body1" component="h5" color= '#57FEFF'>
               {agent.brief}
             </Typography>
             <Typography>
